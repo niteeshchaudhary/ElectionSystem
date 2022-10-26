@@ -33,4 +33,27 @@ address varchar(100),
 foreign key(Id) references ecusers(Id)
 );
 
+create table if not exists elections(
+ename varchar(30) not null,
+vdate date not null,
+time time not null,
+contact_no varchar(25) not null, 
+createdby varchar(30) not null,
+status varchar(2) not null,
+primary key(ename,vdate),
+foreign key(createdby) references ecusers(Id)
+);
+
+create table if not exists candidates(
+ename varchar(30) not null,
+vdate date not null,
+Id varchar(20) not null,
+menifesto varchar(100) not null,
+votes int default(0),check(votes>=0),
+primary key(ename,vdate,Id),
+foreign key(Id) references ecusers(Id)
+);
+
+
+
 insert into ecusers values('admin','admin');

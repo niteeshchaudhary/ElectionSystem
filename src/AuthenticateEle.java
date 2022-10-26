@@ -53,7 +53,7 @@ public class AuthenticateEle extends HttpServlet {
  		if(rs.next()) {
  			if(rs.getString("password").equals(userpassword)) {
  				ses.setAttribute("adminid", userid);
- 				response.sendRedirect("ECdashboard");
+ 				response.sendRedirect("ecdashboard.jsp");
 // 				RequestDispatcher rd = request.getRequestDispatcher("MoreInfo");
 // 				rd.forward(request, response);
  			}

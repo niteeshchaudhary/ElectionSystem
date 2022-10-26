@@ -37,8 +37,11 @@ public class MoreInfo extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		HttpSession ses = request.getSession(); 
-		if(ses.getAttribute("userid")==null || ses.getAttribute("name")!=null) {
+		if(ses.getAttribute("userid")==null) {
 			return;
+		}
+		if(ses.getAttribute("name")!=null) {
+		    response.sendRedirect("dashboard.jsp");
 		}
 		System.out.println("--"+ses.getAttribute("userid")+"--"+ses.getAttribute("name")+"--");
 		
@@ -55,8 +58,9 @@ public class MoreInfo extends HttpServlet {
  		ResultSet rs=stcheck.executeQuery();
  		if(rs.next()) {
  			String name=rs.getString("name");
- 			ses.setAttribute("name", name);
- 			response.sendRedirect("dashboard.jsp");
+ 			
+// 			ses.setAttribute("name", name);
+// 			response.sendRedirect("dashboard.jsp");
  		}
 		String docType =
  		         "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">";
@@ -167,8 +171,7 @@ public class MoreInfo extends HttpServlet {
  	 		else {
  	 			out.println(
  		 		         "<h1 align = \"center\">Error: Unable to Update your Details </h1>\n");
- 	 			RequestDispatcher rd = request.getRequestDispatcher("MoreInfo");
- 	 		    rd.include(request, response);
+ 	 			doGet(request, response);
  	 		}
  			
  			

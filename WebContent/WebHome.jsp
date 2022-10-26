@@ -92,26 +92,13 @@ margin:1rem;
             </div>
     	</div>
   </div>
+  <a href="ShowTable">heelo</a>
 		
 		
 		 <script src='https://code.jquery.com/jquery-3.1.1.slim.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js'></script>
       <script id="rendered-js" >
-/*!
-
- =========================================================
- * Paper Kit 2 - v2.0.0
- =========================================================
-
- * Product Page: http://www.creative-tim.com/product/paper-kit-2
- * Copyright 2017 Creative Tim (http://www.creative-tim.com)
- * Licensed under MIT (https://github.com/timcreative/paper-kit/blob/master/LICENSE.md)
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
 
 var searchVisible = 0;
 var transparent = true;

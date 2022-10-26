@@ -20,10 +20,10 @@ margin:1rem;
 <form action="CreateElections">
 <input type="submit" value="Create Election"/>
 </form>
-<form action="CreateElection">
+<form action="ActiveElections">
 <input type="submit" value="Active Election"/>
 </form>
-<form action="CreateElection">
+<form action="PreviousElections">
 <input type="submit" value="Previous Election"/>
 </form>
 </body>

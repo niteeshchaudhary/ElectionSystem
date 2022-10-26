@@ -36,29 +36,29 @@ public class CreateElections extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		PrintWriter out = response.getWriter();
+	PrintWriter out = response.getWriter();
 		HttpSession ses = request.getSession(); 
-		if(ses.getAttribute("userid")==null || ses.getAttribute("name")!=null) {
+		if(ses.getAttribute("adminid")==null) {
 			return;
 		}
-		System.out.println("--"+ses.getAttribute("userid")+"--"+ses.getAttribute("name")+"--");
+//		System.out.println("--"+ses.getAttribute("userid")+"--"+ses.getAttribute("name")+"--");
+//		
+//	try {
+//		Connection con = null;
+// 		String url = "jdbc:mysql://localhost:3306/elections"; //MySQL URL and followed by the database name
+// 		String username = "universityDB0035"; //MySQL username
+// 		String password = "Niteesh@123"; //MySQL password
 		
-		try {
-		Connection con = null;
- 		String url = "jdbc:mysql://localhost:3306/elections"; //MySQL URL and followed by the database name
- 		String username = "universityDB0035"; //MySQL username
- 		String password = "Niteesh@123"; //MySQL password
-		
- 		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
-		PreparedStatement stcheck = con.prepareStatement("select * from votersdetails where Id=?;");
-		stcheck.setString(1,(String)ses.getAttribute("userid"));
- 		ResultSet rs=stcheck.executeQuery();
- 		if(rs.next()) {
- 			String name=rs.getString("name");
- 			ses.setAttribute("name", name);
- 			response.sendRedirect("dashboard.jsp");
- 		}
+// 		Class.forName("com.mysql.jdbc.Driver");
+//		con = DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
+//		PreparedStatement stcheck = con.prepareStatement("select * from votersdetails where Id=?;");
+//		stcheck.setString(1,(String)ses.getAttribute("userid"));
+// 		ResultSet rs=stcheck.executeQuery();
+// 		if(rs.next()) {
+// 			String name=rs.getString("name");
+// 			ses.setAttribute("name", name);
+// 			response.sendRedirect("dashboard.jsp");
+// 		}
 		String docType =
  		         "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">";
  		      out.println(docType +"<style>" + 
@@ -73,18 +73,18 @@ public class CreateElections extends HttpServlet {
  		      		"</style>"+
  		         "<h2 align = \"center\">Election Details</h2>\n"
  		         + "<form action=\"CreateElections\" method=\"post\">"
- 		         + "Electiom Name:<input type=\"text\" name=\"Ename\"/></br>"
- 		         + "Voting Date:<input type=\"date\" name=\"dob\"/></br>"
- 		         + "Contact No.<input type=\"number\" name=\"phone_no\" /></br>"
- 		         + "Time:<input type=\"time\" name=\"add1\" /></br>"
+ 		         + "Electiom Name:<input type=\"text\" name=\"ename\"/></br>"
+ 		         + "Voting Date:<input type=\"date\" name=\"vdate\"/></br>"
+ 		        + "Time:<input type=\"time\" name=\"time\" /></br>"
+ 		         + "Contact No.<input type=\"number\" name=\"contact_no\" /></br>"
  		       +"<input type=\"submit\" /></br>"
  		         + "</form>");
 		
 		//RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 	    //rd.include(request, response);
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
+//		}catch(Exception ex) {
+//			ex.printStackTrace();
+//		}
 	}
 
 	/**
@@ -95,46 +95,36 @@ public class CreateElections extends HttpServlet {
 		{
 			PrintWriter out = response.getWriter();
 			HttpSession ses = request.getSession(); 
-			Object usr=ses.getAttribute("userid");
+			Object usr=ses.getAttribute("adminid");
 			if(usr==null) {
 				return;
 			}
-			String userid=(String)usr;
+			String adminid=(String)usr;
 	
 		//getting input values from jsp page
 			
-		String name = request.getParameter("name");
-		String dob = request.getParameter("dob");
-		String phone_no = request.getParameter("phone_no");
-		String add1= request.getParameter("add1");
-		String add2= request.getParameter("add2");
-		String pnc=request.getParameter("pincode");
+		String name = request.getParameter("ename");
+		String vdate = request.getParameter("vdate");
+		String contact_no = request.getParameter("contact_no");
+		String time= request.getParameter("time");
+
 		int err=0;
-		int pincode=0;
-		if(pnc!="") {
-			pincode=Integer.parseInt(pnc);
-		}
-		System.out.print("{"+dob+"}");
 		
 		response.setContentType("text/html");
 		
-		if(name.strip().length()==0||add1.strip().length()==0||dob=="") {
+		if(name.strip().length()==0 || vdate=="" ||time=="") {
 			out.println(
 	 		         "<h1 align = \"center\">Provide all details</h1>\n");
 			err=1;
 		}
-		else if(phone_no.length()!=10) {
+		else if(contact_no.length()!=10) {
 			out.println(
 	 		         "<h1 align = \"center\">Invalid Phone Number</h1>\n");
 			err=1;
 		}
-		else if(pincode/1000==0) {
-			out.println("<h1 align = \"center\">Pincode not correct</h1>\n");
-			err=1;
-		}
+		
 		if(err==1) {
 	 		doGet(request, response);
-		
 		}else {
 		
 
@@ -146,28 +136,30 @@ public class CreateElections extends HttpServlet {
  		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
  		System.out.println("Printing connection object "+con);
- 		PreparedStatement stcheck = con.prepareStatement("select * from voters where Id=?;");
- 		stcheck.setString(1,userid);
+ 		PreparedStatement stcheck = con.prepareStatement("select * from ecusers where Id=?;");
+ 		stcheck.setString(1,adminid);
  		ResultSet rs=stcheck.executeQuery();
  		if(rs.next()) {
- 			stcheck = con.prepareStatement("insert into votersdetails values(?,?,?,?,?);");
- 	 		stcheck.setString(1,userid);
- 	 		stcheck.setString(2,name);
- 	 		stcheck.setString(3,dob);
- 	 		stcheck.setString(4,phone_no);
- 	 		stcheck.setString(5,add1+" "+add2);
+ 			stcheck = con.prepareStatement("insert into elections(ename,vdate,time,contact_no,createdby,status) values(?,?,?,?,?,?);");
+ 	 		stcheck.setString(1,name);
+ 	 		stcheck.setString(2,vdate);
+ 	 		stcheck.setString(3,time);
+ 	 		stcheck.setString(4,contact_no);
+ 	 		stcheck.setString(5,adminid);
+ 	 		stcheck.setString(6,"1");
  	 		int rslt=stcheck.executeUpdate();
  	 		if(rslt>0) {
  	 			ses.setAttribute("name", name);
- 	 			response.sendRedirect("dashboard.jsp");
+ 	 			response.sendRedirect("ecdashboard.jsp");
 // 	 			RequestDispatcher rd = request.getRequestDispatcher("dashboard.jsp");
 // 	 		    rd.forward(request, response);  
  	 		}
  	 		else {
  	 			out.println(
  		 		         "<h1 align = \"center\">Error: Unable to Update your Details </h1>\n");
- 	 			RequestDispatcher rd = request.getRequestDispatcher("MoreInfo");
- 	 		    rd.include(request, response);
+ 	 			doGet(request, response);
+// 	 			RequestDispatcher rd = request.getRequestDispatcher("MoreInfo");
+// 	 		    rd.include(request, response);
  	 		}
  			
  			
@@ -182,7 +174,8 @@ public class CreateElections extends HttpServlet {
 		    rd.include(request, response);  
  		}
 	
-	}}
+	}
+			}
 		 catch (Exception e) 
  		{
  			e.printStackTrace();
