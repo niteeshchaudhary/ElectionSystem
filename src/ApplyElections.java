@@ -65,8 +65,7 @@ public class ApplyElections extends HttpServlet {
                 PreparedStatement stcheck = con.prepareStatement("delete from candidates where ename=? and vdate=? and vdate>curdate() id=?");
                 stcheck.setString(1,inpStrings[0]);
                 stcheck.setString(2,inpStrings[1]);
-                stcheck.setString(3,inpStrings[1]);
-                stcheck.setString(4,(String)ses.getAttribute("userid"));
+                stcheck.setString(3,(String)ses.getAttribute("userid"));
                 int rs =stcheck.executeUpdate();
                 if(rs>0) {
                     response.sendRedirect("UpcomingElections");
