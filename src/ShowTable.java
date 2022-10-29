@@ -67,6 +67,7 @@ public class ShowTable extends HttpServlet {
  	 		      );
  	 		   
  			}
+ 		con.close();
  		out.println("</table></body></html>");
 	
 	}

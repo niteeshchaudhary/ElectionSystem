@@ -150,7 +150,7 @@ public class PreviousElections extends HttpServlet {
                
             }
         out.println("</table></body></html>");
-    
+        con.close();
     }}
          catch (Exception e) 
         {

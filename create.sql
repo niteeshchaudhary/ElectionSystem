@@ -48,11 +48,12 @@ create table if not exists candidates(
 ename varchar(30) not null,
 vdate date not null,
 Id varchar(20) not null,
-menifesto varchar(100) not null,
+menifesto text(800) not null,
 votes int default(0),check(votes>=0),
 primary key(ename,vdate,Id),
-foreign key(Id) references ecusers(Id)
+foreign key(Id) references voters(Id)
 );
+
 
 
 

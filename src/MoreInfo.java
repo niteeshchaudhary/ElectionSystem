@@ -104,6 +104,9 @@ public class MoreInfo extends HttpServlet {
 			if(usr==null) {
 				return;
 			}
+			if(ses.getAttribute("name")!=null) {
+	            response.sendRedirect("dashboard.jsp");
+	        }
 			String userid=(String)usr;
 	
 		//getting input values from jsp page
@@ -164,6 +167,7 @@ public class MoreInfo extends HttpServlet {
  	 		int rslt=stcheck.executeUpdate();
  	 		if(rslt>0) {
  	 			ses.setAttribute("name", name);
+ 	 			con.close();
  	 			response.sendRedirect("dashboard.jsp");
 // 	 			RequestDispatcher rd = request.getRequestDispatcher("dashboard.jsp");
 // 	 		    rd.forward(request, response);  
@@ -171,6 +175,7 @@ public class MoreInfo extends HttpServlet {
  	 		else {
  	 			out.println(
  		 		         "<h1 align = \"center\">Error: Unable to Update your Details </h1>\n");
+ 	 			con.close();
  	 			doGet(request, response);
  	 		}
  			
@@ -178,7 +183,7 @@ public class MoreInfo extends HttpServlet {
 			//rd.forward(request, response);
  		}
  		else {
- 			
+ 		   con.close();
  			out.println(
 	 		         "<h1 align = \"center\">Invalid user or user Session </h1>\n");
 			

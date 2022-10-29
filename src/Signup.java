@@ -88,6 +88,7 @@ public class Signup extends HttpServlet {
  	 		con.close();
  	 		if(r_count>0) {
  	 			ses.setAttribute("userid", userid);
+ 	 			con.close();
  	 			response.sendRedirect(request.getContextPath() + "/MoreInfo");
 // 			out.println(
 //	 		         "<h1 align = \"center\">Welcone "+userid+"</h1>\n");
@@ -96,6 +97,7 @@ public class Signup extends HttpServlet {
 //			rd.forward(request, response);
  	 		}else {
  	 			out.print("<h2>some error occured</h2>");
+ 	 			con.close();
  	 			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
  	 		    rd.include(request, response);  
  	 		}

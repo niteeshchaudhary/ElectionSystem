@@ -52,8 +52,16 @@ public class Authenticate extends HttpServlet {
  		ResultSet rs=stcheck.executeQuery();
  		if(rs.next()) {
  			if(rs.getString("password").equals(userpassword)) {
+ 			   stcheck = con.prepareStatement("select *  from votersdetails  where Id=?;");
+ 			   stcheck.setString(1, userid);
+ 			   ResultSet rsset=stcheck.executeQuery();
+ 			   if(rsset.next()) {
+ 			    ses.setAttribute("name",rsset.getString("name"));
  				ses.setAttribute("userid", userid);
+ 				response.sendRedirect("dashboard.jsp");
+ 			   }else {
  				response.sendRedirect("MoreInfo");
+ 			   }
 // 				RequestDispatcher rd = request.getRequestDispatcher("MoreInfo");
 // 				rd.forward(request, response);
  			}
