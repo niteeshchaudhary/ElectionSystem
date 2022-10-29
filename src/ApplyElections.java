@@ -50,7 +50,7 @@ public class ApplyElections extends HttpServlet {
 		    
 		    PrintWriter out = response.getWriter();
             HttpSession ses = request.getSession(); 
-         
+            
             
             String url = "jdbc:mysql://localhost:3306/elections"; //MySQL URL and followed by the database name
             String username = "universityDB0035"; //MySQL username
@@ -59,7 +59,27 @@ public class ApplyElections extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
             response.setContentType("text/html");
-            
+            String query = request.getParameter("withdraw");
+            if(query!=null && query.equals("true")) {
+                String []inpStrings = request.getParameter("id").split(",");
+                PreparedStatement stcheck = con.prepareStatement("delete from candidates where ename=? and vdate=? and vdate>curdate() id=?");
+                stcheck.setString(1,inpStrings[0]);
+                stcheck.setString(2,inpStrings[1]);
+                stcheck.setString(3,inpStrings[1]);
+                stcheck.setString(4,(String)ses.getAttribute("userid"));
+                int rs =stcheck.executeUpdate();
+                if(rs>0) {
+                    response.sendRedirect("UpcomingElections");
+                }
+                else {
+                    out.println(
+                            "<h1 align = \"center\">Error: Unable to Withdraw</h1>\n");
+                   System.out.println("DONEDOEN");
+                 RequestDispatcher rd = request.getRequestDispatcher("UpcomingElections");
+                 rd.include(request, response);
+                }
+            }
+            else {
                 int err=0;
                 String name = request.getParameter("ename");
                 String vdate = request.getParameter("vdate");
@@ -127,7 +147,7 @@ public class ApplyElections extends HttpServlet {
                       rd.include(request, response);
                     }
                 }
-            
+            }
 //            
 //            else if(queryclose!=null && queryclose.equals("true")) {
 //                PreparedStatement stcheck = con .prepareStatement("update elections set status ='2' where ename=? and vdate=?;");   

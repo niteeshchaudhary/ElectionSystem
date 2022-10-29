@@ -52,10 +52,6 @@ public class UpcomingElections extends HttpServlet {
         String qry2="select * from elections as el where status='1' and vdate>CURDATE() and (el.ename,el.vdate) not in (select ename,vdate from candidates where id=?);";
         PreparedStatement stcheck = con .prepareStatement(qry);
         stcheck.setString(1, userid);
-        ResultSet rs=stcheck.executeQuery();
-        stcheck.setString(1, userid);
-        stcheck = con .prepareStatement(qry2);
-        stcheck.setString(1, (String)ses.getAttribute("userid"));
         ResultSet usercandidate=stcheck.executeQuery();
         
          String docType =
@@ -70,6 +66,25 @@ public class UpcomingElections extends HttpServlet {
                 "<tr>"
                  + "<th>Election</th><th>Voting Date</th><th>Time</th><th>Contact Number</th><th>Action</th></tr>"
               );
+        while(usercandidate.next()) {
+            out.println(
+                    "<tr>"
+                     + "<td><label>"+usercandidate.getString("ename")+"</label></td>"
+                     + "<td><label>"+usercandidate.getString("vdate")+"</label></td>"
+                     + "<td><label>"+usercandidate.getString("time")+"</label></td>"
+                     + "<td><label>"+usercandidate.getString("contact_no")+"</label></td>"
+                     + "<td><form action='ApplyElections?withdraw=true' method='post'>"
+                     + "<input type='text' value='"+usercandidate.getString("ename")+","+usercandidate.getString("vdate")+"' name='id' style='display:none'/>"
+                             + "<input type='submit'  value='Withdraw'/>"
+                             + "</form></td>"
+                             + "</tr>" 
+                  );
+               
+            }
+        usercandidate.close();
+        stcheck = con .prepareStatement(qry2);
+        stcheck.setString(1, userid);
+        ResultSet rs=stcheck.executeQuery();
         while(rs.next()) {
                  
             out.println(
