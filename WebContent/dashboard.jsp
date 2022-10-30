@@ -10,6 +10,15 @@
 			margin:1rem;
 			padding:1rem;
 			}
+			body {
+    background-image: url('https://codeelections.com/wp-content/uploads/slider/cache/18b07f700aa800631903d52004f386fe/Img-1028-x-487-06.jpg');
+    color: #FFFFFF;
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+input{
+border-radius:2rem;
+}
 		</style>
 	</head>
 	<body>

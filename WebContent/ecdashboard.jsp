@@ -13,7 +13,16 @@ margin:1rem;
 input{
 padding:1rem;
 margin:1rem;
+border-radius:1rem;
+width:10rem;
 }
+	body {
+    background-image: url('https://cdn.dnaindia.com/sites/default/files/styles/full/public/2019/05/24/827021-election-representation-image-5.jpg');
+    color: #FFFFFF;
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+
 </style>
 </head>
 <body>

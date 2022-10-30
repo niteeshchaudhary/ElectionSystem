@@ -57,7 +57,17 @@ public class UpcomingElections extends HttpServlet {
          String docType =
                      "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n"
          +"<html><head><link rel='stylesheet' href=''>"
-         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"
+         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;width:15rem}td{margin:1rem;padding:1rem;width:15rem}"
+         + "input{margin:1rem;padding:1rem;width:10rem;border-radius:1rem}"+
+         "label{padding:1rem;margin:1rem;width:60rem;font-size:1.3rem}"+
+         "table{background:rgba(20,20,20,0.4);}"+
+ "body {"+
+ "background-image: url('https://media.istockphoto.com/photos/indian-voter-hand-with-voting-sign-after-casting-vote-in-election-picture-id1148772178?k=20&m=1148772178&s=612x612&w=0&h=0xT4MDxjCKM8MzTDjgWaVbpTITW3Oci6B3NvwKncAD4=');"+
+ "color: #FFFFFF;"+
+   "background-repeat: no-repeat;"+
+   "background-size: cover;"+
+"}"+
+         "button{margin:1rem;padding:1rem;border-radius:1rem}"
          + "</style></head<body>";
          
         out.println(docType +
@@ -119,16 +129,18 @@ public class UpcomingElections extends HttpServlet {
 	        
                 PrintWriter out = response.getWriter();
                 HttpSession ses = request.getSession(); 
-                String []inpStrings = request.getParameter("id").split(",");
+                String idStrings =request.getParameter("id");
+                if(idStrings==null) {
+                   // doGet(request, response);
+                    return;
+                }
+                String []inpStrings = idStrings.split(",");
                 
                 String docType =
                       "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">";
                    out.println(docType +"<style>" + 
+                      "h1{ -webkit-text-stroke: 2px black;font-size:4rem;}"+
                          "form{" + 
-                         "padding:1rem;" + 
-                         "margin:1rem;" + 
-                         "}" + 
-                         "input{" + 
                          "padding:1rem;" + 
                          "margin:1rem;" + 
                          "}" + 
@@ -136,14 +148,27 @@ public class UpcomingElections extends HttpServlet {
                          "padding:1rem;" + 
                          "margin:1rem;" + 
                          "width:100rem;" +
+                         "color:#fff;"+
+                         "font-size:1rem;"+
                          "height:30rem;"+
-                   "}"+
+                         "background:rgba(20,20,20,0.6);"+
+                   "}"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;width:15rem}td{margin:1rem;padding:1rem;width:15rem}"
+                   + "input{margin:1rem;padding:1rem;width:20rem;border-radius:1rem}"+
+                   "label{padding:1rem;margin:0.2rem;width:60rem;font-size:1.3rem}"+
+           "body {"+
+           "background-image: url('https://media.istockphoto.com/photos/indian-voter-hand-with-voting-sign-after-casting-vote-in-election-picture-id1148772178?k=20&m=1148772178&s=612x612&w=0&h=0xT4MDxjCKM8MzTDjgWaVbpTITW3Oci6B3NvwKncAD4=');"+
+           "color: #FFFFFF;"+
+             "background-repeat: no-repeat;"+
+             "background-size: cover;"+
+          "}"+
+                   "button{margin:1rem;padding:1rem;border-radius:1rem}"
+                   +
                          "</style>"+
-                      "<h2 align = \"center\">Apply Nomination</h2>\n"
+                      "<h1 align = \"center\">Apply Nomination</h1>\n"
                       + "<form action=\"ApplyElections\" method=\"post\">"
-                      + "Electiom Name:<input type=\"text\" name=\"ename\" value='"+inpStrings[0]+"' /></br>"
-                      + "Voting Date:<input type=\"date\" name=\"vdate\" value='"+inpStrings[1]+"'/></br>"
-                      + "Write Your Manifesto here:</br><textarea  name=\"manifesto\"> </textarea></br>"
+                      + "<label>Electiom Name:</label><br><input type=\"text\" name=\"ename\" value='"+inpStrings[0]+"' /></br>"
+                      + "<label>Voting Date:</label><br><input type=\"date\" name=\"vdate\" value='"+inpStrings[1]+"'/></br>"
+                      + "<label>Write Your Manifesto here:</label></br><textarea  name=\"manifesto\"> </textarea></br>"
                     +"<input type=\"submit\" /></br>"
                       + "</form>");
 //                Connection con = null;

@@ -69,19 +69,24 @@ public class MoreInfo extends HttpServlet {
  		      		"padding:1rem;" + 
  		      		"margin:1rem;" + 
  		      		"}" + 
- 		      		"input{" + 
- 		      		"padding:1rem;" + 
- 		      		"margin:1rem;" + 
- 		      		"}" + 
+ 		      		"input{margin:1rem;padding:1rem;width:25rem;border-radius:1rem}"+
+ 		           "label{padding:1rem;margin:1rem;width:60rem;font-size:1.3rem}"+
+ 		   "body {"+
+ 		   "background-image: url('https://codeelections.com/wp-content/uploads/slider/cache/2f7d9a3a8e40c0015271c11136d2b7a0/header_inked-scaled.jpg');"+
+ 		  "  -webkit-text-stroke: 1px black;"+
+ 		     "background-repeat: no-repeat;"+
+ 		     "background-size: cover;"+
+ 		  "}"+
+ 		           "button{margin:1rem;padding:1rem;border-radius:1rem}"+
  		      		"</style>"+
- 		         "<h2 align = \"center\">Add Your Details here</h2>\n"
+ 		         "<h1 align = \"center\">Add Your Details here</h1>\n"
  		         + "<form action=\"MoreInfo\" method=\"post\">"
- 		         + "Name:<input type=\"text\" name=\"name\"/></br>"
- 		         + "DOB:<input type=\"date\" name=\"dob\"/></br>"
- 		         + "Phone No.<input type=\"number\" name=\"phone_no\" /></br>"
- 		         + "Address Line 1:<input type=\"text\" name=\"add1\" /></br>"
- 		         + "Address Line 2:<input type=\"text\" name=\"add2\" /></br>"
- 		        + "Pincode:<input type=\"number\" name=\"pincode\"/></br></br>"
+ 		         + "<label>Name:</label><br><input type=\"text\" name=\"name\"/></br>"
+ 		         + "<label>DOB:</label><br><input type=\"date\" name=\"dob\"/></br>"
+ 		         + "<label>Phone No.</label><br><input type=\"number\" name=\"phone_no\" /></br>"
+ 		         + "<label>Address Line 1:</label><br><input type=\"text\" name=\"add1\" /></br>"
+ 		         + "<label>Address Line 2:</label><br><input type=\"text\" name=\"add2\" /></br>"
+ 		        + "<label>Pincode:</label><br><input type=\"number\" name=\"pincode\"/></br></br>"
  		       +"<input type=\"submit\" /></br>"
  		         + "</form>");
 		

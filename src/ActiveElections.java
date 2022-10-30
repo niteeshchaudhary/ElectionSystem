@@ -54,10 +54,18 @@ public class ActiveElections extends HttpServlet {
          String docType =
                      "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n"
          +"<html><head><link rel='stylesheet' href=''>"
-         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"
-         + "</style></head<body>";
+         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;width:15rem}td{margin:1rem;padding:1rem;width:15rem}"
+                 + "input{margin:1rem;padding:1rem;width:5rem;border-radius:1rem}"+
+                 "label{padding:1rem;margin:1rem;width:60rem;font-size:1.3rem}"+
+         "body {"+
+         "background-image: url('https://cdn.dnaindia.com/sites/default/files/styles/full/public/2019/05/24/827021-election-representation-image-5.jpg');"+
+         "color: #FFFFFF;"+
+           "background-repeat: no-repeat;"+
+           "background-size: cover;"+
+     "}"+
+         "</style></head<body>";
          out.println(docType +
-                 "<h5>On Going Elections</h5>"+
+                 "<h2>On Going Elections</h2>"+
                  "<table border='1'>"+
                 "<tr>"
                  + "<th>Election</th><th>Voting Date</th><th>Time</th><th>Contact Number</th><th>Action</th></tr>"
@@ -79,7 +87,7 @@ public class ActiveElections extends HttpServlet {
                
             }
 
-        out.println("</table><h5>Upcoming Elections</h5>"+
+        out.println("</table><h2>Upcoming Elections</h2>"+
                  "<table border='1'>"+
                 "<tr>"
                  + "<th>Election</th><th>Voting Date</th><th>Time</th><th>Contact Number</th><th>Action</th></tr>"
@@ -250,17 +258,21 @@ public class ActiveElections extends HttpServlet {
                                 "padding:1rem;" + 
                                 "margin:1rem;" + 
                                 "}" + 
-                                "input{" + 
-                                "padding:1rem;" + 
-                                "margin:1rem;" + 
-                                "}" + 
+                                "label{padding:1rem;margin:1rem;width:60rem;font-size:1.3rem}"+
+                                 "input{margin:1rem;padding:1rem;width:40rem;border-radius:1rem}"+
+                                "body {"+
+                                "background-image: url('https://cdn.dnaindia.com/sites/default/files/styles/full/public/2019/05/24/827021-election-representation-image-5.jpg');"+
+                                "color: #FFFFFF;"+
+                                  "background-repeat: no-repeat;"+
+                                  "background-size: cover;"+
+                            "}"+
                                 "</style>"+
                              "<h2 align = \"center\">Election Details</h2>\n"
                              + "<form action=\"ActiveElections?edit=true&id="+rs.getString("ename")+","+rs.getString("vdate")+"\" method=\"post\">"
-                             + "Electiom Name:<input type=\"text\" name=\"ename\" value='"+rs.getString("ename")+"'/></br>"
-                             + "Voting Date:<input type=\"date\" name=\"vdate\" value='"+rs.getString("vdate")+"'/></br>"
-                            + "Time:<input type=\"time\" name=\"time\" value='"+rs.getString("time")+"'/></br>"
-                             + "Contact No.<input type=\"number\" name=\"contact_no\" value='"+rs.getString("contact_no")+"' /></br>"
+                             + "<label>Electiom Name:</label><br><input type=\"text\" name=\"ename\" value='"+rs.getString("ename")+"'/></br>"
+                             + "<label>Voting Date:</label><br><input type=\"date\" name=\"vdate\" value='"+rs.getString("vdate")+"'/></br>"
+                            + "<label>Time:</label><br><input type=\"time\" name=\"time\" value='"+rs.getString("time")+"'/></br>"
+                             + "<label>Contact No.</label><br><input type=\"number\" name=\"contact_no\" value='"+rs.getString("contact_no")+"' /></br>"
                            +"<input type=\"submit\" /></br>"
                              + "</form>");
                     }
