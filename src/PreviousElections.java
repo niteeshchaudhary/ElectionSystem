@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ActiveElections
@@ -35,6 +36,7 @@ public class PreviousElections extends HttpServlet {
 	    try
         {
                 PrintWriter out = response.getWriter();
+                HttpSession ses = request.getSession(); 
 
 
         Connection con = null;
@@ -50,7 +52,8 @@ public class PreviousElections extends HttpServlet {
          String docType =
                      "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n"
          +"<html><head><link rel='stylesheet' href=''>"
-         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"
+         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"+
+         "button{margin:1rem;padding:1rem}"
          + "</style></head<body>";
          
         out.println(docType +
@@ -75,7 +78,16 @@ public class PreviousElections extends HttpServlet {
                   );
                
             }
-        out.println("</table></body></html>");
+        if((String)ses.getAttribute("userid")!=null){
+        out.println("</table>"
+                + "<button onclick=\"window.location='dashboard.jsp'\">Back</button>"
+                + "</body></html>");
+        }
+        else if((String)ses.getAttribute("adminid")!=null){
+            out.println("</table>"
+                    + "<button onclick=\"window.location='ecdashboard.jsp'\">Back</button>"
+                    + "</body></html>");
+            }
     
     }
          catch (Exception e) 
@@ -112,7 +124,8 @@ public class PreviousElections extends HttpServlet {
          String docType =
                      "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n"
          +"<html><head><link rel='stylesheet' href=''>"
-         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"
+         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"+
+         "button{margin:1rem;padding:1rem}"
          + "</style></head<body>";
          
         out.println(docType +
@@ -134,7 +147,9 @@ public class PreviousElections extends HttpServlet {
                   );
                
             }
-        out.println("</table></body></html>");
+        out.println("</table>"
+                + "<button onclick=\"window.location='PreviousElections'\">Back</button>"
+                + "</body></html>");
         con.close();
     }
          catch (Exception e) 

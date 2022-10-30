@@ -58,7 +58,8 @@ public class VotingPage extends HttpServlet {
          String docType =
                      "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n"
          +"<html><head><link rel='stylesheet' href=''>"
-         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"
+         + "<style>"+"tr{padding:1rem;margin:1rem;}th{padding:1rem;margin:1rem;}td{margin:1rem;padding:1rem;}input{margin:1rem;padding:1rem}"+
+         "button{margin:1rem;padding:1rem}"
          + "</style></head<body>";
          
         out.println(docType +
@@ -86,7 +87,9 @@ public class VotingPage extends HttpServlet {
             }
         usercandidate.close();
        
-        out.println("</table></body></html>");
+        out.println("</table>"
+                + "<button onclick=\"window.location='LiveElections'\">Back</button>"
+                + "</body></html>");
     
     }
          catch (Exception e) 

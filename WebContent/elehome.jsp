@@ -22,7 +22,7 @@ margin:1rem;
 <form class="form" id="signinf" action="AuthenticateEle" method="post" style="display:block">
 			<h2 class="form__title">Election Commission Login</h2>
 			
-				EC Id:  <input class="input" type="text" name="userid" /><br>
+				EC Id:  <input class="input" type="email" name="userid" /><br>
 
 				Password: <input class="input" type="password" name="password" /><br>
 

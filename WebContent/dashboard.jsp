@@ -19,7 +19,8 @@
 		if(username==null || userid==null) 
 			response.sendRedirect("home.jsp");
 		%>
-		<h1>Welcome! ${userid}, ${name}</h1>
+		<h1>Welcome! ${name}</h1>
+		<h3>your id: ${userid}</h3>
 		<form  method="get">
 			<input type="submit" formaction="UpcomingElections" value="Upcoming Elections"/>
 			<input type="submit" formaction="LiveElections" value="Live Elections"/>

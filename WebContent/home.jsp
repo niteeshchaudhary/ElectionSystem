@@ -22,7 +22,7 @@ margin:1rem;
 <form class="form" id="signinf" action="Authenticate" method="post" style="display:block">
 			<h2 class="form__title">User Login</h2>
 			
-				User Id:  <input class="input" type="text" name="userid" /><br>
+				User Id:  <input class="input" type="email" name="userid" /><br>
 
 				Password: <input class="input" type="password" name="password" /><br>
 
@@ -32,7 +32,7 @@ margin:1rem;
 <form class="form"  id="signupf" action="Signup" method="post" style="display:block">
 			<h2 class="form__title">User SignUp</h2>
 			
-				User Id:  <input class="input" type="text" name="userid" /><br>
+				User Id:  <input class="input" type="email" name="userid" /><br>
 
 				Password: <input class="input" type="password" name="password" /><br>
 				Confirm Password: <input class="input" type="password" name="cpassword" /></br></br>

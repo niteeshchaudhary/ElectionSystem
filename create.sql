@@ -67,4 +67,4 @@ foreign key(ename,vdate) references elections(ename,vdate)
 
 
 
-insert into ecusers values('admin','admin');
+insert into ecusers values('admin@gmail.com','admin');
