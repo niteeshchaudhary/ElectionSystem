@@ -66,7 +66,7 @@ public class AuthenticateEle extends HttpServlet {
  	 		         "<body bgcolor = \"#f0f0f0\">\n" +
  	 		         "<h1 align = \"center\">Incorrect Password</h1>\n" +"</body></html>"
  	 		      );
- 	 		    RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+ 	 		    RequestDispatcher rd = request.getRequestDispatcher("elehome.jsp");
  	 		    rd.include(request, response);
 
  			}
@@ -81,7 +81,7 @@ public class AuthenticateEle extends HttpServlet {
  		         "<body bgcolor = \"#f0f0f0\">\n" +
  		         "<h1 align = \"center\">Invalid User</h1>\n" +"</body></html>");
  		      
- 		        RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+ 		        RequestDispatcher rd = request.getRequestDispatcher("elehome.jsp");
 	 		    rd.include(request, response);
  		}
 	

@@ -62,7 +62,7 @@ public class ApplyElections extends HttpServlet {
             String query = request.getParameter("withdraw");
             if(query!=null && query.equals("true")) {
                 String []inpStrings = request.getParameter("id").split(",");
-                PreparedStatement stcheck = con.prepareStatement("delete from candidates where ename=? and vdate=? and vdate>curdate() id=?");
+                PreparedStatement stcheck = con.prepareStatement("delete from candidates where ename=? and vdate=? and vdate>curdate() and id=?;");
                 stcheck.setString(1,inpStrings[0]);
                 stcheck.setString(2,inpStrings[1]);
                 stcheck.setString(3,(String)ses.getAttribute("userid"));
@@ -218,6 +218,9 @@ public class ApplyElections extends HttpServlet {
      catch (Exception e) 
     {
         e.printStackTrace();
+        PrintWriter out = response.getWriter();
+        out.println(
+                "<h1 align = \"center\">Session: Expired </h1>\n");
     }
 		//doGet(request, response);
 	}

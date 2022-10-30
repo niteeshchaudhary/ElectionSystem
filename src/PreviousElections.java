@@ -67,9 +67,9 @@ public class PreviousElections extends HttpServlet {
                      + "<td><label>"+rs.getString("vdate")+"</label></td>"
                      + "<td><label>"+rs.getString("time")+"</label></td>"
                      + "<td><label>"+rs.getString("contact_no")+"</label></td>"
-                     + "<td><form action='#' method='post'>"
+                     + "<td><form action='PreviousElections' method='post'>"
                      + "<input type='text' value='"+rs.getString("ename")+","+rs.getString("vdate")+"' name='id' style='display:none'/>"
-                             + "<input type='submit' value='View Details'/>"
+                             + "<input type='submit' value='Results'/>"
                      + "</form></td>"
                      + "</tr>" 
                   );
@@ -91,7 +91,7 @@ public class PreviousElections extends HttpServlet {
 	    try
         {
                 PrintWriter out = response.getWriter();
-                String query = request.getParameter("close");
+            
                 Connection con = null;
                 String url = "jdbc:mysql://localhost:3306/elections"; //MySQL URL and followed by the database name
                 String username = "universityDB0035"; //MySQL username
@@ -101,26 +101,11 @@ public class PreviousElections extends HttpServlet {
                 con = DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
                 response.setContentType("text/html");
                 String []inpStrings = request.getParameter("id").split(",");
-                
-                if(query!=null && query.equals("true")) {
-                    PreparedStatement stcheck = con .prepareStatement("update elections set status ='2' where ename=? and vdate=?;");   
-                    stcheck.setString(1, inpStrings[0]);
-                    stcheck.setString(2, inpStrings[1]);
-                    int  rline=stcheck.executeUpdate();
-                    if(rline==1) {
-                        
-                    }
-                    else {
-                        out.println("Error in Closing Election");
-                    }
-                    doGet(request, response);
-                }
-                else {
 
        
         System.out.println("Printing connection object "+con);
         
-        PreparedStatement stcheck = con .prepareStatement("select * from elections where ename=? and vdate=?;");
+        PreparedStatement stcheck = con .prepareStatement("select * from candidates where ename=? and vdate=? order by votes desc;");
         stcheck.setString(1, inpStrings[0]);
         stcheck.setString(2, inpStrings[1]);
         ResultSet rs=stcheck.executeQuery();
@@ -134,7 +119,7 @@ public class PreviousElections extends HttpServlet {
                  "<table border='1'>");
         out.println(
                 "<tr>"
-                 + "<th>Election</th><th>Voting Date</th><th>Time</th><th>Contact Number</th><th>Action</th></tr>"
+                 + "<th>Election</th><th>Voting Date</th><th>Candidate</th><th>Menifesto</th><th>Votes</th></tr>"
               );
         while(rs.next()) {
                  
@@ -142,16 +127,16 @@ public class PreviousElections extends HttpServlet {
                     "<tr>"
                      + "<td><label>"+rs.getString("ename")+"</label></td>"
                      + "<td><label>"+rs.getString("vdate")+"</label></td>"
-                     + "<td><label>"+rs.getString("time")+"</label></td>"
-                     + "<td><label>"+rs.getString("contact_no")+"</label></td>"
-                     + "<td><form action='#' method='post'><input type='text' value='"+rs.getString("ename")+","+rs.getString("vdate")+"' name='id' style='display:none'><input type='submit' value='Edit'/><input type='submit' value='close'/></form></td>"
+                     + "<td><label>"+rs.getString("Id")+"</label></td>"
+                     + "<td><label>"+rs.getString("menifesto")+"</label></td>"
+                     + "<td><label>"+rs.getString("votes")+"</label></td>"
                              + "</tr>" 
                   );
                
             }
         out.println("</table></body></html>");
         con.close();
-    }}
+    }
          catch (Exception e) 
         {
             e.printStackTrace();

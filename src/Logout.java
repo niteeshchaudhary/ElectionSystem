@@ -30,7 +30,7 @@ public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession ses = request.getSession();  
 		ses.invalidate();
-	    response.sendRedirect("home.jsp");
+	    response.sendRedirect("WebHome.jsp");
 	    return;
 	}
 

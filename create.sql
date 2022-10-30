@@ -52,6 +52,16 @@ menifesto text(800) not null,
 votes int default(0),check(votes>=0),
 primary key(ename,vdate,Id),
 foreign key(Id) references voters(Id)
+foreign key(ename,vdate) references elections(ename,vdate)
+
+create table if not exists voting_history(
+ename varchar(30) not null,
+vdate date not null,
+Id varchar(20) not null,
+voted boolean default(false),
+primary key(ename,vdate,Id),
+foreign key(Id) references voters(Id),
+foreign key(ename,vdate) references elections(ename,vdate)
 );
 
 

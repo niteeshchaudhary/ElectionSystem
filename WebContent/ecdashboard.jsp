@@ -26,5 +26,8 @@ margin:1rem;
 <form action="PreviousElections">
 <input type="submit" value="Previous Election"/>
 </form>
+		<form  method="post">
+			<input type="submit"  formaction="Logout" value="Log Out"/>
+		</form>
 </body>
 </html>

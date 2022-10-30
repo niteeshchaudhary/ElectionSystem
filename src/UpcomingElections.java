@@ -75,7 +75,7 @@ public class UpcomingElections extends HttpServlet {
                      + "<td><label>"+usercandidate.getString("contact_no")+"</label></td>"
                      + "<td><form action='ApplyElections?withdraw=true' method='post'>"
                      + "<input type='text' value='"+usercandidate.getString("ename")+","+usercandidate.getString("vdate")+"' name='id' style='display:none'/>"
-                             + "<input type='submit'  value='Withdraw'/>"
+                             + "<input type='submit'  value='.  .  .  Withdraw  .  .  .'/>"
                              + "</form></td>"
                              + "</tr>" 
                   );

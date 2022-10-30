@@ -20,11 +20,13 @@
 			response.sendRedirect("home.jsp");
 		%>
 		<h1>Welcome! ${userid}, ${name}</h1>
-		<form action="UpcomingElections" method="get">
+		<form  method="get">
 			<input type="submit" formaction="UpcomingElections" value="Upcoming Elections"/>
 			<input type="submit" formaction="LiveElections" value="Live Elections"/>
 			<input type="submit" formaction="PreviousElections" value="Past Elections"/>
-			<input type="submit" value="Log Out"/>
+		</form>
+		<form  method="post">
+			<input type="submit"  formaction="Logout" value="Log Out"/>
 		</form>
 	</body>
 </html>

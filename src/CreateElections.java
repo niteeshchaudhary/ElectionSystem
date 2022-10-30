@@ -97,6 +97,8 @@ public class CreateElections extends HttpServlet {
 			HttpSession ses = request.getSession(); 
 			Object usr=ses.getAttribute("adminid");
 			if(usr==null) {
+		        out.println(
+		                "<h1 align = \"center\">Session: Expired </h1>\n");
 				return;
 			}
 			String adminid=(String)usr;
@@ -179,6 +181,9 @@ public class CreateElections extends HttpServlet {
 		 catch (Exception e) 
  		{
  			e.printStackTrace();
+ 	        PrintWriter out = response.getWriter();
+ 	        out.println(
+ 	                "<h1 align = \"center\">Session: Expired </h1>\n");
  		}
 		
 	}
